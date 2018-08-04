@@ -9,10 +9,13 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/get-data', function(req, res, next) {
- 	mongo.connect('mongodb://localhost:27017/testgeojson', {useNewUrlParser : true },function(err, client) {
+ 	mongo.connect('mongodb://127.0.0.1:27017/testgeojson', {useNewUrlParser : true },function(err, client) {
  		assert.equal(null, err);
  		var db = client.db('testgeojson');
- 		console.log(db.collection('geojson').findOne());
+ 		db.collection('geojson').findOne().then(function(value){
+ 			res.render('index', {items: value});
+ 			console.log(value);
+		});
  		client.close();
 	});
  });
