@@ -3,6 +3,7 @@ var router = express.Router();
 var mongo = require('mongodb');
 var assert = require('assert');
 var timeseries = require('timeseries-analysis');
+var plotly = require('plotly')('AFraysse','Ws2sOK0YAW1OzM1A3hzy');
 
 
 
@@ -22,8 +23,21 @@ router.get('/', function(req, res, next) {
                 x.push(item['t']);
             });
             StringData = JSON.stringify(value['values']);
-            //console.log(x, y);
+            console.log(x.length, y.length);
 
+
+      //      var datatrace = [
+        //      {
+          //          x: x,
+            //        y: y,
+              //   type: 'scatter'
+   //            }
+     //        ];
+       //     var graphOptions = {filename: "date-axes", fileopt: "overwrite"};
+         //   plotly.plot('div1', datatrace, graphOptions, function (err, msg) {
+           //     if (err) return console.log(err);
+             //   console.log(msg);
+          //  });
 
             //création de la variable data pour être utilisée avec timeseries-analysis
             var data = [];
