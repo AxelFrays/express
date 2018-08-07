@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
     mongo.connect('mongodb://127.0.0.1:27017/testgeojson', {useNewUrlParser : true },function(err, client) {
@@ -16,4 +17,6 @@ router.get('/', function(req, res, next) {
         client.close();
     });
 });
+
+
 module.exports = router;
