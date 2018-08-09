@@ -9,30 +9,31 @@ var assert = require('assert');
 router.get('/', function(req, res, next) {
     mongo.connect('mongodb://127.0.0.1:27017/testgeojson', {useNewUrlParser : true },function(err, client) {
         assert.equal(null, err);
-        var GlobalVector = [];
-        var ValueGPS, ValueAlt = [];
-        var x = [];
+
+        let geo_data = [];
         var db = client.db('testgeojson');
+
         db.collection('geojson').findOne().then(function(value){
 
-            StringData = JSON.stringify(value);
-            res.render('carte', {items: value});
-            //console.log(StringData);
             value['features'][0]['geometry']['coordinates'].forEach(function(item){
-                x.push(item);
+                geo_data.push({
+                    lat: item[0],
+                    long: item[1],
+                    alt: null
+                });
             });
-            ValueGPS = x;
-               });
+            return db.collection('altitude').findOne();
 
-        db.collection('altitude').findOne().then(function(value){
-            StringDataAlt = JSON.stringify(value);
+       }).then(function(value){
             //console.log(StringDataAlt);
-            value['values'].forEach(function(item){
-               ValueAlt.push(item['alt']);
+            value['values'].forEach((item, index) => {
+               geo_data[index].alt = item.alt;
             });
+
+
+            res.json(geo_data);
         });
-        GlobalVector = [ValueGPS,ValueAlt];
-        console.log(GlobalVector);
+       
         client.close();
     });
 });
