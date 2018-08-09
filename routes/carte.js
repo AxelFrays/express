@@ -32,10 +32,13 @@ router.get('/', function(req, res, next) {
 
 
             res.json(geo_data);
+
+            client.close();
+        }).catch(function(err){
+            console.log(err);
         });
-       
-        client.close();
-    });
+
+    })
 });
 
 
