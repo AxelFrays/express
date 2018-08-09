@@ -5,9 +5,13 @@ function launch(){
 	fetch('http://' + location.host + '/carte').then(function(res) {
 		return res.json();
 	}).then(function(data) {
-		document.body.innerText = JSON.stringify(data);
+		initiateCesium(data);
 
 	}).catch(function(error) {
 		alert('AHH!');
 	});
+}
+
+function initiateCesium(data) {
+	var viewer = new Cesium.Viewer('cesiumContainer');
 }
