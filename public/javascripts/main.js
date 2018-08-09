@@ -14,4 +14,16 @@ function launch(){
 
 function initiateCesium(data) {
 	var viewer = new Cesium.Viewer('cesiumContainer');
+	
+	viewer.entities.add({
+		name: 'My Super path',
+		polyline: {
+			positions: data.map(function(coords){
+				return Cesium.Cartesian3.fromDegrees(coords.long, coords.lat, coords.alt);
+			}),
+			id: {
+				poulet:5
+			}
+		}
+	});
 }
