@@ -3,12 +3,13 @@ window.addEventListener('load', launch);
 
 function launch(){
 	fetch('http://' + location.host + '/analyse').then(function(res) {
-		return res.send();
+		return res.json();
 	}).then(function(data){
-		console.log("dans la fonction");
+		document.querySelector("#rupture").innerText = "Rupture: " + Math.floor(data.rupturedate) + "s";
 		plotall(data);
 
 	}).catch(function(error) {
+		console.log(error);
 		alert('l initialisation n a pas fonctionné');
 	});
 }
@@ -30,22 +31,24 @@ function format(data){
 	});
 
 	let payload =  data.map(el => {
-		return {x: el.t, y: el.padyload_regression};
+		return {x: el.t, y: el['payload_regression']};
 	});
 
 	return { current, payload };
 }
 
 function plotall(data){
-	let {current, payload} = format(data);
+	let {current, payload} = format(data.raw);
 
 	let chart_data = {
 		datasets: [
-			getDataset('Courant', current, 'courant', chartColors.blue),
-			getDataset('Payload', payload, 'payload', chartColors.red)
+			getDataset('Courant', current, 'courant', 'rgb(0,0,255)'),
+			getDataset('Payload', payload, 'payload', 'rgb(255,0,0)')
 		]
 	};
 
+
+	console.info('DATAAAAAA', chart_data);
 	// get canvas context
 	let ctx = document.querySelector('canvas').getContext('2d');
 
@@ -64,16 +67,17 @@ function plotall(data){
 					type: 'linear',
 					display: true,
 					position: 'left',
-					id: 'y-axis-1',
+					id: 'courant',
 				}, {
 					type: 'linear',
 					display: true,
 					position: 'right',
-					id: 'y-axis-2',
-					gridLines: {
-						drawOnChartArea: false,
-					},
+					id: 'payload'
 				}],
+				xAxes:[{
+					type: 'linear',
+					position: 'bottom'
+				}]
 			}
 		}
 	})

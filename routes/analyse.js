@@ -73,4 +73,8 @@ router.get('/', function(req, res, next) {
 });
 
 
+router.get('/chart', function(req, res, next) {
+    res.render('analyse');
+})
+
 module.exports = router;
