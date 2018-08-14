@@ -5,8 +5,12 @@ var assert = require('assert');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Home' });
 });
+
+//router.get('/carte', function(req, res, next){
+//	res.render('analyse', { title: 'Analyse'});
+//});
 
 router.get('/get-data', function(req, res, next) {
  	mongo.connect('mongodb://127.0.0.1:27017/testgeojson', {useNewUrlParser : true },function(err, client) {

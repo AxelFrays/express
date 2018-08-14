@@ -10,65 +10,64 @@ var plotly = require('plotly')('AFraysse','Ws2sOK0YAW1OzM1A3hzy');
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
+    res.render('analyse', {title: 'Analyse du courant'});
     mongo.connect('mongodb://127.0.0.1:27017/testgeojson', {useNewUrlParser : true },function(err, client) {
         assert.equal(null, err);
+        let donnee = [];
         var db = client.db('testgeojson');
-        db.collection('currentdata').findOne().then(function(value){
-            //console.log(value);
-            //res.render('analyse', {items: value});
+        db.collection('simulation').findOne().then(function(value){
+            console.log(value['values']);
 
-            var x = [], y = [];
-            value['values'].forEach(function(item){
-                y.push(item['curr']);
-                x.push(item['t']);
+            value['values'].forEach(function(item) {
+
+                donnee.push({
+                    y: item['curr'],
+                    x: item['t']
+                });
             });
-            StringData = JSON.stringify(value['values']);
-            console.log(x.length, y.length);
+                res.json(donnee);
+                return donnee;
 
+            }).then(function(data){
+                console.log(data);
+                var timedata = [];
+                var i = 0;
+                data.forEach(function(item){
+                   timedata.push([item['x'],item['y']]);
+                });
 
-      //      var datatrace = [
-        //      {
-          //          x: x,
-            //        y: y,
-              //   type: 'scatter'
-   //            }
-     //        ];
-       //     var graphOptions = {filename: "date-axes", fileopt: "overwrite"};
-         //   plotly.plot('div1', datatrace, graphOptions, function (err, msg) {
-           //     if (err) return console.log(err);
-             //   console.log(msg);
-          //  });
+                console.log(timedata);
+            var timeseriesdata = new timeseries.main(timedata);
 
-            //création de la variable data pour être utilisée avec timeseries-analysis
-            var data = [];
-            var i = 0;
-            x.forEach(function(donnee){
-                data.push([donnee, y[i]]);
-                i = i+1;
-            });
-
-            //console.log(data);
-
-            //définition des valeurs moyenne m et écart type e
-            var timeseriesdata = new timeseries.main(data);
-
-            var moyenne = timeseriesdata.mean();
-            var ecart = timeseriesdata.stdev();
-            //console.log(moyenne, ecart);
+                     var moyenne = timeseriesdata.mean();
+                     var ecart = timeseriesdata.stdev();
+            console.log(moyenne, ecart);
 
             //Algorithme pour chopper la zone de décrochage de tension
-                var j =0;
-                while(data[j][1]>moyenne-Math.trunc(moyenne/ecart)*ecart){
-                    j=j+1;
-                };
-                rupturedate = data[j][0];
+                         var j =2;
+  //                         while((timedata[j][1]>moyenne-Math.trunc(moyenne/ecart)*ecart)&&(timedata[j-2][1]+timedata[j-1][1]>1.7*moyenne))
+    //                    {
+      //                       j=j+1;
+        //                  };
+                          //rupturedate = timedata[j][0];
 
-                console.log(rupturedate);
+                          for(j=2;j<data.length();j++){
+                              if((timedata[j][1]<moyenne-Math.trunc(moyenne/ecart)*ecart)&&(timedata[j-2][1]+timedata[j-1][1]>1.7*moyenne)){
+                                  rupturedate= timedata[j][2];
+                                  return rupturedate;
+                              }
+                              else{
+                                  j++;
+                              }
+                          }
 
-
+                         console.log(rupturedate);
+                         //res.send(data);
+        }).catch(function (err) {
+            console.log(err);
+        });
         });
         client.close();
-    });
 });
 
 
