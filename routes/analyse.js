@@ -10,7 +10,7 @@ var plotly = require('plotly')('AFraysse','Ws2sOK0YAW1OzM1A3hzy');
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
-    res.render('analyse', {title: 'Analyse du courant'});
+
     mongo.connect('mongodb://127.0.0.1:27017/testgeojson', {useNewUrlParser : true },function(err, client) {
         assert.equal(null, err);
         let donnee = [];
@@ -25,49 +25,51 @@ router.get('/', function(req, res, next) {
                     x: item['t']
                 });
             });
-                res.json(donnee);
-                return donnee;
 
-            }).then(function(data){
-                console.log(data);
-                var timedata = [];
-                var i = 0;
-                data.forEach(function(item){
-                   timedata.push([item['x'],item['y']]);
-                });
+            return {raw: value.values, data:donnee};
 
-                console.log(timedata);
+        }).then(function({data, raw}){
+            console.log(data);
+            var timedata = [];
+            var i = 0;
+            var rupturedate = null;
+            data.forEach(function(item){
+               timedata.push([item['x'],item['y']]);
+            });
+
+            console.log(timedata);
             var timeseriesdata = new timeseries.main(timedata);
 
-                     var moyenne = timeseriesdata.mean();
-                     var ecart = timeseriesdata.stdev();
+            var moyenne = timeseriesdata.mean();
+             var ecart = timeseriesdata.stdev();
             console.log(moyenne, ecart);
 
             //Algorithme pour chopper la zone de décrochage de tension
-                         var j =2;
-  //                         while((timedata[j][1]>moyenne-Math.trunc(moyenne/ecart)*ecart)&&(timedata[j-2][1]+timedata[j-1][1]>1.7*moyenne))
-    //                    {
-      //                       j=j+1;
-        //                  };
-                          //rupturedate = timedata[j][0];
+             var j =2;
+//                         while((timedata[j][1]>moyenne-Math.trunc(moyenne/ecart)*ecart)&&(timedata[j-2][1]+timedata[j-1][1]>1.7*moyenne))
+//                    {
+//                       j=j+1;
+//                  };
+              //rupturedate = timedata[j][0];
 
-                          for(j=2;j<data.length();j++){
-                              if((timedata[j][1]<moyenne-Math.trunc(moyenne/ecart)*ecart)&&(timedata[j-2][1]+timedata[j-1][1]>1.7*moyenne)){
-                                  rupturedate= timedata[j][2];
-                                  return rupturedate;
-                              }
-                              else{
-                                  j++;
-                              }
-                          }
+              for(j=2;j<data.length;j++){
+                  if((timedata[j][1]<moyenne-Math.trunc(moyenne/ecart)*ecart)&&(timedata[j-2][1]+timedata[j-1][1]>1.7*moyenne)){
+                      rupturedate= timedata[j][0];
+                      break;
+                  }
+              }
 
-                         console.log(rupturedate);
-                         //res.send(data);
+             console.log(rupturedate);
+            res.json({
+                raw,
+                rupturedate
+            })
+            client.close();
+             //res.send(data);
         }).catch(function (err) {
             console.log(err);
         });
-        });
-        client.close();
+    });
 });
 
 
