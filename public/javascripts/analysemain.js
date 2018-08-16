@@ -26,19 +26,23 @@ function getDataset(name, data, yid, color, opts = {}){
 }
 
 function format(data){
-	let current =  data.map(el => {
+	let current =  data['raw'].map(el => {
 		return {x: el.t, y: el.curr};
 	});
 
-	let payload =  data.map(el => {
-		return {x: el.t, y: el['payload_regression']};
-	});
+	//let payload =  data.map(el => {
+	//	return {x: el.t, y: el['payload_regression']};
+	//});
+
+	let payload= data['payloadapproximation'];
+
 
 	return { current, payload };
 }
 
 function plotall(data){
-	let {current, payload} = format(data.raw);
+	let {current, payload} = format(data)
+//	let {current, payload} = format(data.raw);
 
 	let chart_data = {
 		datasets: [

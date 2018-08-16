@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 
         var db = client.db('testgeojson');
 
-        db.collection('geojson').findOne().then(function(value){
+        db.collection('geojson').findOne({type : "GeoSimulation"}).then(function(value){ //remplacer id par une variable donnée par l'utilisateur pour définir quel vol on veut
 
             value['features'][0]['geometry']['coordinates'].forEach(function(item){
                 geo_data.push({
@@ -23,7 +23,7 @@ router.get('/', function(req, res, next) {
                     alt: null
                 });
             });
-            return db.collection('altitude').findOne();
+            return db.collection('altitude').findOne({type: "AltitudeSimulation"});
 
        }).then(function(value){
         //console.log(StringDataAlt);

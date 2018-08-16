@@ -14,21 +14,41 @@ router.get('/', function(req, res, next) {
     mongo.connect('mongodb://127.0.0.1:27017/testgeojson', {useNewUrlParser : true },function(err, client) {
         assert.equal(null, err);
         let donnee = [];
+        let payloadapproximation = [];
+        var a = 0.0055;
         var db = client.db('testgeojson');
         db.collection('simulation').findOne().then(function(value){
             console.log(value['values']);
 
             value['values'].forEach(function(item) {
 
+                 if(item['curr']*180.8+421.7>1000){
+                payloadapproximation.push({
+                    x: item['t'],
+                    y: item['curr'] * 180.8 + 421.7-1000
+                });
+
                 donnee.push({
                     y: item['curr'],
                     x: item['t']
                 });
+            }
+            else {
+                     payloadapproximation.push({
+                         x: item['t'],
+                         y: 0
+                     });
+
+                     donnee.push({
+                         y: item['curr'],
+                         x: item['t']
+                     });
+                 }
             });
 
-            return {raw: value.values, data:donnee};
+            return {raw: value.values, data:donnee, payloadapproximation: payloadapproximation};
 
-        }).then(function({data, raw}){
+        }).then(function({data, raw, payloadapproximation}){
             console.log(data);
             var timedata = [];
             var i = 0;
@@ -62,7 +82,8 @@ router.get('/', function(req, res, next) {
              console.log(rupturedate);
             res.json({
                 raw,
-                rupturedate
+                rupturedate,
+                payloadapproximation
             })
             client.close();
              //res.send(data);

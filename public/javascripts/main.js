@@ -10,7 +10,9 @@ function launch(){
 	}).then(function(data) {
 		//console.log(data);
 		let czml = formatedata(data);
+        console.log(czml);
 		initiateCesiumCzml(czml);
+
 
 	}).catch(function(error) {
 		console.log(error);
