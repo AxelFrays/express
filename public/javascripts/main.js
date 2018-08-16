@@ -65,8 +65,8 @@ function formatedata(data){
         };
 	let intervalle = 0;
 	data.forEach(function(item, index){
-		path.position.cartographicDegrees.push(intervalle, item.long, item.lat, item.alt +250);
-		intervalle = intervalle + 10;
+		path.position.cartographicDegrees.push(intervalle, item.long, item.lat, item.alt);
+		intervalle = intervalle + 1;
 	});
 	czml.push(path);
 
