@@ -27,7 +27,7 @@ function formatedata(data){
         "clock": {
             "interval": "2012-08-04T10:00:00Z/2012-08-04T15:00:00Z",
             "currentTime": "2012-08-04T10:00:00Z",
-            "multiplier": 1}
+            "multiplier": 0.5}
 	}];
 
 	var path = {"id" : "path",
@@ -65,8 +65,8 @@ function formatedata(data){
         };
 	let intervalle = 0;
 	data.forEach(function(item, index){
-		path.position.cartographicDegrees.push(intervalle, item.long, item.lat, item.alt);
-		intervalle = intervalle + 1;
+		path.position.cartographicDegrees.push(intervalle, item.long, item.lat, item.alt+350);
+		intervalle = intervalle + 0.02;
 	});
 	czml.push(path);
 

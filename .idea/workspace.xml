@@ -4,6 +4,7 @@
     <list default="true" id="1ed2aba0-4416-49e6-bee2-9e6addefa45e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/javascripts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/javascripts/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/carte.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/carte.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,24 +51,24 @@
     <session id="1714139679">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="16" />
+          <entry key="project.closed" value="18" />
           <entry key="project.open.time.33" value="1" />
           <entry key="project.open.time.46" value="2" />
           <entry key="project.open.time.47" value="2" />
-          <entry key="project.open.time.48" value="1" />
+          <entry key="project.open.time.48" value="2" />
           <entry key="project.open.time.49" value="2" />
           <entry key="project.open.time.50" value="2" />
           <entry key="project.open.time.51" value="2" />
           <entry key="project.open.time.52" value="1" />
           <entry key="project.open.time.53" value="1" />
-          <entry key="project.open.time.54" value="1" />
+          <entry key="project.open.time.54" value="2" />
           <entry key="project.open.time.56" value="1" />
           <entry key="project.open.time.57" value="1" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.66" value="1" />
           <entry key="project.open.time.71" value="2" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="22" />
+          <entry key="project.opened" value="24" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -97,13 +98,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="hbs" value="481" />
-          <entry key="js" value="8486" />
+          <entry key="js" value="8539" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Handlebars/Mustache" value="481" />
-          <entry key="JavaScript" value="8486" />
+          <entry key="JavaScript" value="8539" />
         </counts>
       </usages-collector>
     </session>
@@ -114,7 +115,7 @@
         <entry file="file://$PROJECT_DIR$/public/javascripts/analysemain.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
-              <caret line="10" column="30" lean-forward="true" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+              <caret line="10" column="30" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -169,7 +170,7 @@
         <entry file="file://$PROJECT_DIR$/views/carte.hbs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
-              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
@@ -177,8 +178,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/carte.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="16" selection-start-line="16" selection-end-line="17" />
+            <state relative-caret-position="15">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
@@ -186,8 +187,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/javascripts/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="68" column="35" selection-start-line="68" selection-start-column="35" selection-end-line="68" selection-end-column="35" />
+            <state relative-caret-position="272">
+              <caret line="68" column="38" selection-start-line="68" selection-start-column="38" selection-end-line="68" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -345,12 +346,14 @@
       <workItem from="1534346786781" duration="2451000" />
       <workItem from="1534406951877" duration="5049000" />
       <workItem from="1534426153289" duration="676000" />
-      <workItem from="1534446097627" duration="4896000" />
+      <workItem from="1534446097627" duration="5008000" />
+      <workItem from="1534491758901" duration="770000" />
+      <workItem from="1534510078271" duration="899000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108318000" />
+    <option name="totallyTimeSpent" value="110099000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -364,8 +367,8 @@
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6177156" visible="true" weight="0.25937748" />
-      <window_info id="Structure" order="1" sideWeight="0.38228437" side_tool="true" visible="true" weight="0.25937748" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6130536" visible="true" weight="0.26815644" />
+      <window_info id="Structure" order="1" sideWeight="0.38694638" side_tool="true" visible="true" weight="0.26815644" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -848,6 +851,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/analysemain.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="30" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/views/analyse.hbs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -882,31 +892,24 @@
     <entry file="file://$PROJECT_DIR$/routes/analyse.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/analysemain.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="30" lean-forward="true" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/carte.hbs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/carte.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="16" selection-start-line="16" selection-end-line="17" />
+        <state relative-caret-position="15">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="68" column="35" selection-start-line="68" selection-start-column="35" selection-end-line="68" selection-end-column="35" />
+        <state relative-caret-position="272">
+          <caret line="68" column="38" selection-start-line="68" selection-start-column="38" selection-end-line="68" selection-end-column="38" />
         </state>
       </provider>
     </entry>

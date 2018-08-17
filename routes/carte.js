@@ -23,7 +23,7 @@ router.get('/', function(req, res, next) {
                     alt: null
                 });
             });
-            return db.collection('altitude').findOne({type: "AltitudeSimulation"});
+            return db.collection('altitude').findOne({type: "AltitudeSimulation3"});
 
        }).then(function(value){
         //console.log(StringDataAlt);
