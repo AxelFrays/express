@@ -12,9 +12,9 @@ router.get('/', function(req, res, next) {
 
         let geo_data = [];
 
-        var db = client.db('testgeojson');
+        var dao = client.db('testgeojson');
 
-        db.collection('geojson').findOne({type : "GeoSimulation"}).then(function(value){ //remplacer id par une variable donnée par l'utilisateur pour définir quel vol on veut
+        dao.collection('geojson').findOne({type : "GeoSimulation"}).then(function(value){ //remplacer id par une variable donnée par l'utilisateur pour définir quel vol on veut
 
             value['features'][0]['geometry']['coordinates'].forEach(function(item){
                 geo_data.push({
@@ -23,7 +23,7 @@ router.get('/', function(req, res, next) {
                     alt: null
                 });
             });
-            return db.collection('altitude').findOne({type: "AltitudeSimulation3"});
+            return dao.collection('altitude').findOne({type: "AltitudeSimulation3"});
 
        }).then(function(value){
         //console.log(StringDataAlt);

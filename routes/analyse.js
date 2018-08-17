@@ -15,9 +15,8 @@ router.get('/', function(req, res, next) {
         assert.equal(null, err);
         let donnee = [];
         let payloadapproximation = [];
-        var a = 0.0055;
-        var db = client.db('testgeojson');
-        db.collection('simulation').findOne().then(function(value){
+        var dao = client.db('testgeojson');
+        dao.collection('simulation').findOne().then(function(value){
             console.log(value['values']);
 
             value['values'].forEach(function(item) {

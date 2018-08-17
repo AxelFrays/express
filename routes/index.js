@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 router.get('/get-data', function(req, res, next) {
  	mongo.connect('mongodb://127.0.0.1:27017/testgeojson', {useNewUrlParser : true },function(err, client) {
  		assert.equal(null, err);
- 		var db = client.db('testgeojson');
+ 		var dao = client.dao('testgeojson');
  		db.collection('geojson').findOne().then(function(value){
  			res.render('index', {items: value});
  			console.log(value);

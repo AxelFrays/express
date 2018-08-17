@@ -5,7 +5,7 @@ function launch(){
 	fetch('http://' + location.host + '/analyse').then(function(res) {
 		return res.json();
 	}).then(function(data){
-		document.querySelector("#rupture").innerText = "Rupture: " + Math.floor(data.rupturedate) + "s";
+		document.querySelector("#rupture").innerText = "Rupture: " + Math.round(data.rupturedate) + "s";
 		plotall(data);
 
 	}).catch(function(error) {
@@ -35,7 +35,6 @@ function format(data){
 	//});
 
 	let payload= data['payloadapproximation'];
-
 
 	return { current, payload };
 }
@@ -82,7 +81,23 @@ function plotall(data){
 					type: 'linear',
 					position: 'bottom'
 				}]
-			}
+			},
+            annotation: {
+                annotations: [
+                    {
+                        type: "line",
+                        mode: "vertical",
+                        scaleID: "x-axis-0",
+                        value: Math.round(data.rupturedate),
+                        borderColor: "green",
+                        label: {
+                            content: "Rupture:"+ Math.round(data.rupturedate),
+                            enabled: true,
+                            position: "top"
+                        }
+                    }
+                ]
+            }
 		}
 	})
 }
