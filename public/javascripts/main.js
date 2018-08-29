@@ -12,7 +12,7 @@ function launch(){
 		let czml = formatedata(data);
         console.log(czml);
 		initiateCesiumCzml(czml);
-
+        //initiateCesiumClassic(data);
 
 	}).catch(function(error) {
 		console.log(error);
@@ -27,7 +27,7 @@ function formatedata(data){
         "clock": {
             "interval": "2012-08-04T10:00:00Z/2012-08-04T15:00:00Z",
             "currentTime": "2012-08-04T10:00:00Z",
-            "multiplier": 0.5}
+            "multiplier": 5}
 	}];
 
 	var path = {"id" : "path",
@@ -66,7 +66,7 @@ function formatedata(data){
 	let intervalle = 0;
 	data.forEach(function(item, index){
 		path.position.cartographicDegrees.push(intervalle, item.long, item.lat, item.alt+350);
-		intervalle = intervalle + 0.02;
+		intervalle = intervalle + 0.22;
 	});
 	czml.push(path);
 

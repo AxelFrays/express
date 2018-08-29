@@ -7,15 +7,25 @@ var assert = require('assert');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    mongo.connect('mongodb://127.0.0.1:27017/testgeojson', {useNewUrlParser: true}, function (err, client) {
+    mongo.connect('mongodb://127.0.0.1:27017', {useNewUrlParser: true}, function (err, client) {
         assert.equal(null, err);
 
         let geo_data = [];
 
-        var dao = client.db('testgeojson');
+        var dao = client.db('FlightDataBase');
 
-        dao.collection('geojson').findOne({type : "GeoSimulation"}).then(function(value){ //remplacer id par une variable donnée par l'utilisateur pour définir quel vol on veut
+        let GPSID = 0;
+        let ALTID = 0;
+        dao.collection('FlightID').findOne().then(function(value){
+            GPSID = value['donnees']['GPS'];
 
+
+        return dao.collection('FlightID').findOne()
+        }).then(function (value){
+            ALTID = value['donnees']['Altitude'];
+
+            return dao.collection('FlightData').findOne({_id : mongo.ObjectId(GPSID)});
+        }).then(function(value){ //remplacer id par une variable donnée par l'utilisateur pour définir quel vol on veut
             value['features'][0]['geometry']['coordinates'].forEach(function(item){
                 geo_data.push({
                     lat: item[1],
@@ -23,10 +33,11 @@ router.get('/', function(req, res, next) {
                     alt: null
                 });
             });
-            return dao.collection('altitude').findOne({type: "AltitudeSimulation3"});
+            return dao.collection('FlightData').findOne({_id: mongo.ObjectId(ALTID)});
 
        }).then(function(value){
         //console.log(StringDataAlt);
+            console.log(value);
             value['values'].forEach((item, index) => {
                geo_data[index].alt = item.alt;
             });
